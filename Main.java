@@ -1,10 +1,10 @@
 import java.util.*;
 public class Main {
 
-    private static Ticket [] tickets=new Ticket[52];
+    //creating instance variables
+    private static final Ticket [] tickets=new Ticket[52];
     private static int ticketCount=0;
-
-    private static int[][] seats = new int[4][];
+    private static final int[][] seats = new int[4][];
 
 
 
@@ -12,6 +12,7 @@ public class Main {
 
 
     public int user_menu(){
+        //printing the menu and getting a response from the user
         System.out.println("\n\n");
         System.out.println("*".repeat(50));
         System.out.println("*"+" ".repeat(18)+"MENU OPTIONS"+" ".repeat(18)+"*");
@@ -26,25 +27,25 @@ public class Main {
         System.out.println("*".repeat(50));
         System.out.print("Please select an option: ");
         int response= new Scanner(System.in).nextInt();
-        System.out.println("\n\n");
+        System.out.println();
         return response;
     }
 
-    public void cancel_seat(int[][] seats){
+    public static void cancel_seat(int[][] seats){
         System.out.print("Please Enter the row letter: ");
         String row_letter=new Scanner(System.in).next().toLowerCase();
-        System.out.print("Enter the Seat number: ");
-        int seat_number=new Scanner(System.in).nextInt();
+        int seat_number;
         switch (row_letter){
             case "a":
+                System.out.print("Enter the Seat number: ");
+                seat_number=new Scanner(System.in).nextInt();
                 if(seat_number>0 && seat_number<15){
                     if(seats[0][seat_number-1]==1){
-                        System.out.println("Seat "+row_letter.toUpperCase()+" "+seat_number+" has succesfully Cancelled.");
                         seats[0][seat_number-1]=0;
                         for (int i = 0; i < ticketCount; i++) {
                             Ticket ticket = tickets[i];
-                            if (Objects.equals(ticket.getRow(), "A") && ticket.getSeat() == seat_number) {
-                                for (int j = i; j < ticketCount - 1; j++) {
+                            if (Objects.equals(ticket.getRow(), "A") && ticket.getSeat()+1 == seat_number) {
+                                for (int j = i; j < ticketCount; j++) {
                                     tickets[j] = tickets[j + 1];
                                 }
                                 tickets[ticketCount - 1] = null;
@@ -62,13 +63,14 @@ public class Main {
                 }
                 break;
             case "b":
+                System.out.print("Enter the Seat number: ");
+                seat_number=new Scanner(System.in).nextInt();
                 if(seat_number>0 && seat_number<13){
                     if(seats[1][seat_number-1]==1){
-                        System.out.println("Seat "+row_letter.toUpperCase()+" "+seat_number+" has succesfully Cancelled.");
                         seats[1][seat_number-1]=0;
                         for (int i = 0; i < ticketCount; i++) {
                             Ticket ticket = tickets[i];
-                            if (Objects.equals(ticket.getRow(), "B") && ticket.getSeat() == seat_number) {
+                            if (Objects.equals(ticket.getRow(), "B") && ticket.getSeat()+1 == seat_number) {
                                 for (int j = i; j < ticketCount - 1; j++) {
                                     tickets[j] = tickets[j + 1];
                                 }
@@ -87,13 +89,14 @@ public class Main {
                 }
                 break;
             case "c":
+                System.out.print("Enter the Seat number: ");
+                seat_number=new Scanner(System.in).nextInt();
                 if(seat_number>0 && seat_number<13){
                     if(seats[2][seat_number-1]==1){
-                        System.out.println("Seat "+row_letter.toUpperCase()+" "+seat_number+" has succesfully Cancelled.");
                         seats[2][seat_number-1]=0;
                         for (int i = 0; i < ticketCount; i++) {
                             Ticket ticket = tickets[i];
-                            if (Objects.equals(ticket.getRow(), "C") && ticket.getSeat() == seat_number) {
+                            if (Objects.equals(ticket.getRow(), "C") && ticket.getSeat()+1 == seat_number) {
                                 for (int j = i; j < ticketCount - 1; j++) {
                                     tickets[j] = tickets[j + 1];
                                 }
@@ -112,13 +115,14 @@ public class Main {
                 }
                 break;
             case "d":
+                System.out.print("Enter the Seat number: ");
+                seat_number=new Scanner(System.in).nextInt();
                 if(seat_number>0 && seat_number<15){
                     if(seats[3][seat_number-1]==1){
-                        System.out.println("Seat "+row_letter.toUpperCase()+" "+seat_number+" has succesfully Cancelled.");
                         seats[3][seat_number-1]=0;
                         for (int i = 0; i < ticketCount; i++) {
                             Ticket ticket = tickets[i];
-                            if (Objects.equals(ticket.getRow(), "D") && ticket.getSeat() == seat_number) {
+                            if (Objects.equals(ticket.getRow(), "D") && ticket.getSeat()+1 == seat_number) {
                                 for (int j = i; j < ticketCount - 1; j++) {
                                     tickets[j] = tickets[j + 1];
                                 }
@@ -143,7 +147,7 @@ public class Main {
 
     }
 
-    public double price_check(int seat_number){
+    public static double price_check(int seat_number){
         if(seat_number>0&&seat_number<6){
             return 200;
         } else if (seat_number>5&&seat_number<10) {
@@ -152,7 +156,7 @@ public class Main {
             return 180;
         }
     }
-    public void buy_seat(int[][] seats){
+    public static void buy_seat(int[][] seats){
         System.out.print("Please Enter your name: ");
         String name=new Scanner(System.in).next();
         System.out.print("Please Enter your surname: ");
@@ -253,7 +257,7 @@ public class Main {
 
     }
 
-    public void find_first_available(int[][] seats){
+    public static void find_first_available(int[][] seats){
         int x=0;
         int n;
         boolean state=false;
@@ -313,7 +317,6 @@ public class Main {
 
     public static void print_tickets_info() {
         double totalAmount = 0;
-        System.out.println(ticketCount);
 
         System.out.print("\nTickets Sold During Session: \n");
         for (int i = 0; i < ticketCount; i++) {
@@ -367,7 +370,6 @@ public class Main {
 
         // If the seat is not found in the seats array, check the tickets array
         if (!found) {
-            System.out.println("This seat is unavailable.");
             String row;
             int seatno;
             for (int i = 0; i < ticketCount; i++) {
@@ -403,9 +405,9 @@ public class Main {
             response=new Main().user_menu();
             switch(response){
                 case 0: System.out.println("Quiting"); break;
-                case 1: new Main().buy_seat(seats); break;
-                case 2: new Main().cancel_seat(seats); break;
-                case 3: new Main().find_first_available(seats); break;
+                case 1: buy_seat(seats); break;
+                case 2: cancel_seat(seats); break;
+                case 3: find_first_available(seats); break;
                 case 4: show_seating_plan(seats); break;
                 case 5: print_tickets_info(); break;
                 case 6: search_ticket(); break;
