@@ -17,33 +17,40 @@ public class Ticket {
     }
 
     // Getters and setters
+
     public String getRow() {
         return row;
     }
+
     public void setRow(String row) {
         this.row = row;
     }
+
     public int getSeat() {
         return seat;
     }
+
     public void setSeat(int seat) {
         this.seat = seat;
     }
+
     public double getPrice() {
         return price;
     }
+
     public void setPrice(double price) {
         this.price = price;
     }
+
     public Person getPerson() {
         return person;
     }
+
     public void setPerson(Person person) {
         this.person = person;
     }
 
     public void save() {
-
         String filename = row + (seat+1) + ".txt"; // Generate filename based on row and seat number
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write("Ticket Information:\n");
@@ -55,7 +62,6 @@ public class Ticket {
             writer.write("Surname: " + person.getSurname() + "\n");
             writer.write("Email: " + person.getEmail() + "\n");
             System.out.println("Ticket information saved to file: " + filename);
-            writer.close();
         } catch (IOException e) {
             System.out.println("Error occurred while saving ticket information to file: " + e.getMessage());
         }
