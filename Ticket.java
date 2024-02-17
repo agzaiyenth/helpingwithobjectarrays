@@ -1,18 +1,71 @@
+// Ticket.java
+import java.io.FileWriter;
+import java.io.IOException;
 public class Ticket {
-    String row;
-    int seat;
-    Person person;
+    private String row;
+    private int seat;
+    private double price;
+    private Person person;
 
-    public Ticket(String row, int seat, Person person) {
+
+    public Ticket(String row, int seat, double price, Person person) {
         this.row = row;
         this.seat = seat;
+        this.price = price;
+        this.person = person;
+
+    }
+
+    // Getters and setters
+    public String getRow() {
+        return row;
+    }
+    public void setRow(String row) {
+        this.row = row;
+    }
+    public int getSeat() {
+        return seat;
+    }
+    public void setSeat(int seat) {
+        this.seat = seat;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public Person getPerson() {
+        return person;
+    }
+    public void setPerson(Person person) {
         this.person = person;
     }
 
-    public void ticket_information(){
-        new Person(person.name, person.surname, person.email).information();
-        System.out.printf("Row :%s \nSeat :%d ",row,seat);
+    public void save() {
 
+        String filename = row + (seat+1) + ".txt"; // Generate filename based on row and seat number
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write("Ticket Information:\n");
+            writer.write("Row: " + row + "\n");
+            writer.write("Seat: " + (seat + 1) + "\n");
+            writer.write("Price: " + price + "\n");
+            writer.write("Person Information:\n");
+            writer.write("Name: " + person.getName() + "\n");
+            writer.write("Surname: " + person.getSurname() + "\n");
+            writer.write("Email: " + person.getEmail() + "\n");
+            System.out.println("Ticket information saved to file: " + filename);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error occurred while saving ticket information to file: " + e.getMessage());
+        }
+    }
 
+    public void printInfo() {
+        System.out.println("Person Information:");
+        person.printInfo();
+        System.out.print("  Row: " + row);
+        System.out.println(" Seat: " + (seat+1));
+        System.out.println("  Price: " +price);
     }
 }
