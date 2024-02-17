@@ -303,7 +303,7 @@ public class PlaneManagement{
 
     public static void find_first_available(int[][] seats){
         int x=0;
-        int n;
+        int n=1;
         boolean state=false;
         String row_letter=" ";
         for(int[] row :seats){
@@ -324,7 +324,7 @@ public class PlaneManagement{
                     System.out.println("Error Row letter ");
 
             }
-            n=1;
+
             for(int seat:row){
                 if(seat==0){
 
