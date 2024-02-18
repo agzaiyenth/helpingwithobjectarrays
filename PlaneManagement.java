@@ -1,7 +1,7 @@
 import java.util.*;
 public class PlaneManagement{
 
-    //creating instance variables
+    //creating instance variables and array objects
     private static final Ticket [] tickets=new Ticket[52];
     private static int ticketCount=0;
     private static final int[][] seats = new int[4][];
@@ -466,6 +466,7 @@ public class PlaneManagement{
                 default: System.out.println("Invalid Option,Try again..");break;
             }
         }while (response!=0);
+
 
 
 

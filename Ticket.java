@@ -1,7 +1,7 @@
 // Ticket.java
 import java.io.FileWriter;
 import java.io.IOException;
-public class Ticket {
+public class Ticket{
     private String row;
     private int seat;
     private double price;
@@ -9,6 +9,7 @@ public class Ticket {
 
 
     public Ticket(String row, int seat, double price, Person person) {
+
         this.row = row;
         this.seat = seat;
         this.price = price;
