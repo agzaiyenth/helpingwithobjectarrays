@@ -1,5 +1,4 @@
-// Ticket.java
-import java.io.FileWriter;
+
 import java.io.IOException;
 public class Ticket{
     private String row;
@@ -51,22 +50,7 @@ public class Ticket{
         this.person = person;
     }
 
-    public void save() {
-        String filename = row + (seat+1) + ".txt"; // Generate filename based on row and seat number
-        try (FileWriter writer = new FileWriter(filename)) {
-            writer.write("Ticket Information:\n");
-            writer.write("Row: " + row + "\n");
-            writer.write("Seat: " + (seat + 1) + "\n");
-            writer.write("Price: " + price + "\n");
-            writer.write("Person Information:\n");
-            writer.write("Name: " + person.getName() + "\n");
-            writer.write("Surname: " + person.getSurname() + "\n");
-            writer.write("Email: " + person.getEmail() + "\n");
-            System.out.println("Ticket information saved to file: " + filename);
-        } catch (IOException e) {
-            System.out.println("Error occurred while saving ticket information to file: " + e.getMessage());
-        }
-    }
+
 
     public void printInfo() {
         System.out.println("Person Information:");
@@ -74,5 +58,6 @@ public class Ticket{
         System.out.print("  Row: " + row);
         System.out.println(" Seat: " + (seat+1));
         System.out.println("  Price: " +price);
+        System.out.println();
     }
 }
